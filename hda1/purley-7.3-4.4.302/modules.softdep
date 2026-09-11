@@ -1,3 +1,0 @@
-# Soft dependencies extracted from modules themselves.
-softdep uhci_hcd pre: ehci_pci
-softdep ppp_mppe pre: arc4
