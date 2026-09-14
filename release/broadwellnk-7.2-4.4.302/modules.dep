@@ -1,0 +1,400 @@
+3w-9xxx.ko:
+3w-sas.ko:
+8139cp.ko: mii.ko
+8139too.ko: mii.ko
+8390.ko:
+9p.ko: 9pnet.ko
+9pnet.ko:
+9pnet_virtio.ko: 9pnet.ko virtio.ko virtio_ring.ko
+aacraid.ko:
+acpi-cpufreq.ko: processor.ko
+acpi_call.ko:
+adm1021.ko:
+adm1031.ko:
+adm9240.ko:
+adt7470.ko:
+adt7475.ko:
+aic8800_fdrv.ko: cfg80211.ko aic_load_fw.ko usbcore.ko
+aic94xx.ko:
+aic_load_fw.ko: usbcore.ko
+alx.ko: mdio.ko
+apex.ko: gasket.ko
+aqc111.ko: usbnet.ko usbcore.ko
+ashmem_linux.ko:
+asix.ko: mii.ko libphy.ko usbnet.ko usbcore.ko
+atkbd.ko:
+atl1c.ko:
+atl1e.ko:
+atlantic.ko: crc-itu-t.ko
+auxiliary.ko:
+ax88179_178a.ko: usbnet.ko usbcore.ko mii.ko
+b44.ko: ssb.ko libphy.ko mii.ko
+bcm-phy-lib.ko: libphy.ko
+be2net.ko:
+binder_linux.ko:
+bitblit.ko: fb.ko softcursor.ko
+bnx2.ko:
+bnx2x.ko: mdio.ko vxlan.ko
+bnxt_en.ko: vxlan.ko
+broadcom.ko: bcm-phy-lib.ko libphy.ko
+btcoexist.ko:
+button.ko:
+cdc_ether.ko: usbnet.ko usbcore.ko
+cdc_ncm.ko: usbnet.ko usbcore.ko
+cdrom.ko:
+cfbcopyarea.ko:
+cfbfillrect.ko:
+cfbimgblt.ko:
+cfg80211.ko: rfkill.ko
+ch.ko:
+ch341.ko: usbserial.ko usbcore.ko
+ch35x_38x.ko:
+ch9200.ko: usbnet.ko usbcore.ko mii.ko
+cls_fw.ko:
+cls_u32.ko:
+cn.ko:
+cp210x.ko: usbserial.ko usbcore.ko
+cpufreq_conservative.ko: cpufreq_governor.ko
+cpufreq_governor.ko:
+cpufreq_ondemand.ko: cpufreq_governor.ko
+cpufreq_performance.ko:
+cpufreq_powersave.ko:
+cpufreq_stats.ko:
+cpufreq_userspace.ko:
+crc-ccitt.ko:
+crc-itu-t.ko:
+cx82310_eth.ko: usbnet.ko usbcore.ko
+cxgb.ko: mdio.ko
+cxgb3.ko: mdio.ko
+cxgb4.ko:
+cxgb4vf.ko:
+dm9601.ko: usbnet.ko usbcore.ko mii.ko
+dme1737.ko:
+dvb-core.ko:
+dvb-usb-dib0700.ko: dib7000m.ko dib9000.ko dibx000_common.ko dvb-usb.ko dib0090.ko dib0070.ko dib3000mc.ko usbcore.ko rc-core.ko
+dvb-usb-dvbsky.ko: dvb_usb_v2.ko dvb-core.ko usbcore.ko rc-core.ko m88ds3103.ko
+dvb-usb.ko: rc-core.ko dvb-core.ko usbcore.ko
+dvb_usb_v2.ko: rc-core.ko dvb-core.ko usbcore.ko
+e1000.ko:
+e1000e.ko:
+eeprom_93cx6.ko:
+efivarfs.ko:
+etxhci-hcd.ko: usbcore.ko
+evbug.ko:
+evdev.ko:
+exfat.ko:
+f71882fg.ko:
+f75375s.ko:
+fb.ko: fbdev.ko
+fb_sys_fops.ko:
+fbcon.ko: fb.ko fbdev.ko font.ko bitblit.ko
+fbdev.ko:
+font.ko:
+ftdi_sio.ko: usbserial.ko usbcore.ko
+gasket.ko:
+gpio-beeper.ko:
+hpilo.ko:
+hpsa.ko:
+hvc_console.ko:
+i2c-algo-bit.ko:
+i40e.ko: vxlan.ko intel_auxiliary.ko
+i8042.ko:
+iavf.ko: auxiliary.ko
+ib_addr.ko: ipv6.ko
+ib_cm.ko: ib_core.ko ib_mad.ko ib_sa.ko
+ib_core.ko: ib_addr.ko
+ib_mad.ko: ib_core.ko
+ib_sa.ko: ib_core.ko ib_mad.ko
+ib_umad.ko: ib_mad.ko ib_core.ko
+ib_uverbs.ko: ib_core.ko
+ice.ko: vxlan.ko auxiliary.ko
+ide-core.ko:
+ide-gd_mod.ko: ide-core.ko
+ide-pci-generic.ko: ide-core.ko
+igb.ko: dca.ko
+igbvf.ko:
+igc.ko:
+intel_auxiliary.ko:
+intel_idle.ko:
+ip6_tables.ko: x_tables.ko
+ip6_udp_tunnel.ko:
+ip6table_filter.ko: x_tables.ko ip6_tables.ko
+ip6table_mangle.ko: x_tables.ko ipv6.ko ip6_tables.ko
+ip_set.ko: nfnetlink.ko
+ip_set_hash_ip.ko: ip_set.ko
+ip_set_hash_ipport.ko: ip_set.ko
+ip_set_hash_ipportnet.ko: ip_set.ko
+ip_set_hash_net.ko: ip_set.ko
+ip_tables.ko: x_tables.ko
+ip_vs.ko: nf_conntrack.ko ipv6.ko
+ip_vs_rr.ko: ip_vs.ko
+ipmi_devintf.ko: ipmi_msghandler.ko
+ipmi_msghandler.ko:
+ipmi_poweroff.ko: ipmi_msghandler.ko
+ipmi_si.ko: ipmi_msghandler.ko
+ipmi_ssif.ko: ipmi_msghandler.ko
+ipt_MASQUERADE.ko: nf_nat_masquerade_ipv4.ko x_tables.ko
+iptable_filter.ko: x_tables.ko ip_tables.ko
+iptable_mangle.ko: x_tables.ko ip_tables.ko
+iptable_nat.ko: ip_tables.ko nf_nat_ipv4.ko
+ipv6.ko:
+irqbypass.ko:
+isci.ko:
+iscsi_tcp.ko: libiscsi.ko libiscsi_tcp.ko
+it87.ko:
+iw_cm.ko: ib_core.ko
+iwldvm.ko: mac80211.ko iwlwifi.ko cfg80211.ko
+iwlmvm.ko: iwlwifi.ko mac80211.ko cfg80211.ko
+iwlwifi.ko: cfg80211.ko
+ixgb.ko:
+ixgbe.ko: dca.ko vxlan.ko
+ixgbevf.ko:
+jc42.ko:
+jme.ko: mii.ko
+kvm-amd.ko: kvm.ko
+kvm-intel.ko: kvm.ko
+kvm.ko: irqbypass.ko
+lan78xx.ko: usbcore.ko libphy.ko
+lib80211.ko:
+libfc.ko: scsi_transport_fc.ko
+libiscsi.ko:
+libiscsi_tcp.ko: libiscsi.ko
+libphy.ko:
+llc.ko:
+lm75.ko:
+lm78.ko:
+lm90.ko:
+lm95245.ko:
+m88ds3103.ko: regmap-i2c.ko dvb-core.ko
+mac80211.ko: cfg80211.ko
+mcs7830.ko: usbnet.ko usbcore.ko mii.ko
+mdio.ko:
+megaraid.ko:
+megaraid_mbox.ko: megaraid_mm.ko
+megaraid_mm.ko:
+megaraid_sas.ko:
+mii.ko:
+mlx4_core.ko:
+mlx4_en.ko: mlx4_core.ko
+mlx4_ib.ko: mlx4_core.ko ib_core.ko ib_mad.ko ib_sa.ko
+mlx5_core.ko:
+mlx5_ib.ko: mlx5_core.ko ib_core.ko
+mlx_compat.ko:
+mlxsw_core.ko:
+mlxsw_pci.ko: mlxsw_core.ko
+mmc_block.ko: mmc_core.ko
+mmc_core.ko:
+mpt3sas.ko:
+mptbase.ko:
+mptctl.ko: mptbase.ko
+mptsas.ko: mptscsih.ko mptbase.ko
+mptscsih.ko: mptbase.ko
+mptspi.ko: mptscsih.ko mptbase.ko scsi_transport_spi.ko
+mt7601u.ko: mac80211.ko cfg80211.ko usbcore.ko
+mtk-sd.ko: mmc_core.ko
+mvsas.ko:
+mwifiex.ko: cfg80211.ko
+mwifiex_sdio.ko: mmc_core.ko mwifiex.ko
+mwifiex_usb.ko: mwifiex.ko usbcore.ko
+nct6683.ko:
+nct6775.ko:
+ne2k-pci.ko: 8390.ko
+netxen_nic.ko:
+nf_conntrack.ko:
+nf_conntrack_ipv4.ko: nf_conntrack.ko nf_defrag_ipv4.ko
+nf_conntrack_ipv6.ko: nf_conntrack.ko nf_defrag_ipv6.ko ipv6.ko
+nf_conntrack_pptp.ko: nf_conntrack.ko nf_conntrack_proto_gre.ko
+nf_conntrack_proto_gre.ko: nf_conntrack.ko
+nf_defrag_ipv4.ko:
+nf_defrag_ipv6.ko: ipv6.ko
+nf_log_common.ko:
+nf_log_ipv4.ko: nf_log_common.ko
+nf_log_ipv6.ko: nf_log_common.ko
+nf_nat.ko: nf_conntrack.ko
+nf_nat_ipv4.ko: nf_nat.ko nf_conntrack.ko
+nf_nat_masquerade_ipv4.ko: nf_conntrack.ko nf_nat.ko
+nf_nat_pptp.ko: nf_conntrack_pptp.ko nf_nat_proto_gre.ko nf_nat.ko nf_conntrack.ko
+nf_nat_proto_gre.ko: nf_nat.ko
+nf_nat_redirect.ko: nf_nat.ko
+nfnetlink.ko:
+nfnetlink_acct.ko: nfnetlink.ko
+nfnetlink_queue.ko: nfnetlink.ko
+ntfs.ko:
+p8022.ko: llc.ko
+pcspeaker.ko:
+pcspkr.ko:
+phy-mt65xx-usb3.ko:
+phy.ko:
+piix.ko: ide-core.ko
+pktcdvd.ko: cdrom.ko
+pl2303.ko: usbserial.ko usbcore.ko
+pmbus.ko: pmbus_core.ko
+pmbus_core.ko:
+prism2_usb.ko: cfg80211.ko usbcore.ko
+processor.ko:
+psnap.ko: llc.ko
+qcaspi.ko:
+qed.ko:
+qede.ko: vxlan.ko qed.ko
+qedr.ko: qed.ko ib_core.ko
+qla3xxx.ko:
+qlcnic.ko:
+qlge.ko:
+r8125.ko:
+r8126.ko:
+r8127.ko:
+r8152.ko: usbcore.ko
+r8168.ko:
+r8169.ko:
+r8169_lk.ko: mii.ko
+rc-core.ko:
+realtek.ko: libphy.ko
+regmap-i2c.ko:
+rfkill-gpio.ko: rfkill.ko
+rfkill.ko:
+rndis_host.ko: usbnet.ko usbcore.ko cdc_ether.ko
+rtl8187.ko: mac80211.ko eeprom_93cx6.ko cfg80211.ko usbcore.ko
+rtl8188ee.ko: rtlwifi.ko rtl_pci.ko mac80211.ko
+rtl818x_pci.ko: mac80211.ko eeprom_93cx6.ko cfg80211.ko
+rtl8192c-common.ko: rtlwifi.ko
+rtl8192ce.ko: rtlwifi.ko rtl_pci.ko rtl8192c-common.ko mac80211.ko
+rtl8192cu.ko: mac80211.ko rtlwifi.ko rtl8192c-common.ko rtl_usb.ko usbcore.ko
+rtl8192de.ko: rtlwifi.ko rtl_pci.ko
+rtl8192ee.ko: rtlwifi.ko rtl_pci.ko btcoexist.ko mac80211.ko
+rtl8192se.ko: rtlwifi.ko rtl_pci.ko mac80211.ko
+rtl8723-common.ko:
+rtl8723ae.ko: rtlwifi.ko rtl8723-common.ko rtl_pci.ko btcoexist.ko
+rtl8723be.ko: rtlwifi.ko rtl8723-common.ko rtl_pci.ko btcoexist.ko mac80211.ko
+rtl8821ae.ko: rtlwifi.ko rtl_pci.ko btcoexist.ko mac80211.ko
+rtl8xxxu.ko: usbcore.ko mac80211.ko
+rtl_pci.ko: mac80211.ko rtlwifi.ko
+rtl_usb.ko: mac80211.ko rtlwifi.ko usbcore.ko
+rtlwifi.ko: mac80211.ko cfg80211.ko
+rtsx_pci.ko:
+rtsx_pci_sdmmc.ko: rtsx_pci.ko mmc_core.ko
+rtsx_usb.ko: usbcore.ko
+rtsx_usb_sdmmc.ko: rtsx_usb.ko mmc_core.ko
+sata_sil.ko:
+sch_codel.ko:
+sch_fq.ko:
+sch_fq_codel.ko:
+sch_htb.ko:
+sch_mqprio.ko:
+sch_multiq.ko:
+sch_netem.ko:
+sch_pie.ko:
+sch_sfq.ko:
+scsi_debug.ko:
+scsi_transport_fc.ko:
+scsi_transport_spi.ko:
+sdhci-acpi.ko: sdhci.ko mmc_core.ko
+sdhci-pci.ko: sdhci.ko mmc_core.ko
+sdhci-pltfm.ko: sdhci.ko
+sdhci.ko: mmc_core.ko
+sdio_uart.ko: mmc_core.ko
+sfc.ko: mdio.ko i2c-algo-bit.ko
+sg.ko:
+si2157.ko:
+si2168.ko:
+skge.ko:
+sky2.ko:
+smartpqi.ko:
+smsc75xx.ko: usbnet.ko usbcore.ko mii.ko
+smsc95xx.ko: usbnet.ko usbcore.ko mii.ko
+snd-hwdep.ko: snd.ko
+snd-mixer-oss.ko: snd.ko
+snd-pcm-oss.ko: snd-pcm.ko snd.ko snd-mixer-oss.ko
+snd-pcm.ko: snd.ko
+snd-rawmidi.ko: snd.ko snd-seq-device.ko
+snd-seq-device.ko: snd.ko
+snd-seq-midi-event.ko: snd-seq.ko
+snd-seq-midi.ko: snd-seq-midi-event.ko snd-seq.ko snd-rawmidi.ko snd-seq-device.ko
+snd-seq.ko: snd.ko snd-seq-device.ko snd-timer.ko
+snd-timer.ko: snd.ko
+snd-usb-audio.ko: snd-usbmidi-lib.ko snd-pcm.ko snd.ko usbcore.ko snd-hwdep.ko
+snd-usb-hiface.ko: usbcore.ko snd-pcm.ko snd.ko
+snd-usbmidi-lib.ko: usbcore.ko snd-rawmidi.ko snd.ko
+snd.ko: soundcore.ko
+softcursor.ko: fb.ko
+sound_firmware.ko:
+soundcore.ko:
+sp2.ko: dvb-core.ko
+sr9700.ko: usbnet.ko usbcore.ko mii.ko
+sr9800.ko: usbnet.ko usbcore.ko mii.ko
+sr_mod.ko: cdrom.ko
+ssb.ko:
+stp.ko: llc.ko
+syscopyarea.ko:
+sysfillrect.ko:
+sysimgblt.ko:
+tcp_bic.ko:
+tcp_cdg.ko:
+tcp_dctcp.ko:
+tcp_highspeed.ko:
+tcp_htcp.ko:
+tcp_hybla.ko:
+tcp_illinois.ko:
+tcp_lp.ko:
+tcp_scalable.ko:
+tcp_vegas.ko:
+tcp_veno.ko:
+tcp_westwood.ko:
+tcp_yeah.ko: tcp_vegas.ko
+tehuti.ko:
+tg3.ko: libphy.ko
+thermal.ko:
+tps65217.ko: regmap-i2c.ko
+ts2020.ko: regmap-i2c.ko
+tty0tty.ko:
+udp_tunnel.ko:
+uhci-hcd.ko: usbcore.ko
+usbnet.ko: usbcore.ko mii.ko
+usbserial.ko: usbcore.ko
+ushc.ko: usbcore.ko mmc_core.ko
+vfio-pci.ko: vfio.ko irqbypass.ko vfio_virqfd.ko
+vfio.ko:
+vfio_iommu_type1.ko: vfio.ko
+vfio_virqfd.ko:
+via-rhine.ko: mii.ko
+via-sdmmc.ko: mmc_core.ko
+via-velocity.ko: crc-ccitt.ko
+virtio.ko:
+virtio_blk.ko: virtio.ko virtio_ring.ko
+virtio_console.ko: virtio.ko hvc_console.ko virtio_ring.ko
+virtio_input.ko: virtio.ko virtio_ring.ko
+virtio_mmio.ko: virtio.ko virtio_ring.ko
+virtio_net.ko: virtio.ko virtio_ring.ko
+virtio_pci.ko: virtio_ring.ko virtio.ko
+virtio_ring.ko:
+virtio_scsi.ko: virtio.ko virtio_ring.ko
+vmw_pvscsi.ko:
+vmw_vmci.ko:
+vmw_vsock_vmci_transport.ko: vmw_vmci.ko vsock.ko
+vmxnet3.ko:
+vsock.ko:
+vub300.ko: usbcore.ko mmc_core.ko
+vxlan.ko: udp_tunnel.ko ip6_udp_tunnel.ko
+w83781d.ko:
+w83793.ko:
+wireguard.ko: ipv6.ko udp_tunnel.ko ip6_udp_tunnel.ko
+x_tables.ko:
+xt_LOG.ko: x_tables.ko
+xt_NFQUEUE.ko: x_tables.ko
+xt_REDIRECT.ko: x_tables.ko nf_nat_redirect.ko
+xt_TCPMSS.ko: x_tables.ko
+xt_addrtype.ko: x_tables.ko
+xt_conntrack.ko: x_tables.ko nf_conntrack.ko
+xt_iprange.ko: x_tables.ko
+xt_ipvs.ko: x_tables.ko ip_vs.ko
+xt_l2tp.ko: x_tables.ko
+xt_limit.ko: x_tables.ko
+xt_mac.ko: x_tables.ko
+xt_mark.ko: x_tables.ko
+xt_multiport.ko: x_tables.ko
+xt_nat.ko: x_tables.ko nf_nat.ko
+xt_policy.ko: x_tables.ko
+xt_recent.ko: x_tables.ko
+xt_set.ko: x_tables.ko ip_set.ko
+xt_state.ko: x_tables.ko nf_conntrack.ko
+xt_tcpudp.ko: x_tables.ko
+yt6801.ko:
