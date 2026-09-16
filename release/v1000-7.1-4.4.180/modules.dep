@@ -131,7 +131,6 @@ kvm-amd.ko: kvm.ko
 kvm-intel.ko: kvm.ko
 kvm.ko: irqbypass.ko
 lan78xx.ko: usbcore.ko libphy.ko
-libfc.ko: scsi_transport_fc.ko
 libiscsi.ko:
 libiscsi_tcp.ko: libiscsi.ko
 libphy.ko:
@@ -203,7 +202,6 @@ rtsx_usb.ko: usbcore.ko
 rtsx_usb_sdmmc.ko: rtsx_usb.ko mmc_core.ko
 sata_sil.ko:
 scsi_debug.ko:
-scsi_transport_fc.ko:
 scsi_transport_sas.ko:
 scsi_transport_spi.ko:
 sdhci-acpi.ko: sdhci.ko mmc_core.ko

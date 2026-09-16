@@ -36,7 +36,7 @@ be2net.ko:
 binder_linux.ko:
 bitblit.ko: fb.ko softcursor.ko
 bnx2.ko:
-bnx2x.ko: mdio.ko
+bnx2x.ko: mdio.ko vxlan.ko
 bnxt_en.ko: vxlan.ko
 broadcom.ko: bcm-phy-lib.ko libphy.ko
 btcoexist.ko:
@@ -335,7 +335,7 @@ snd-hda-codec-si3054.ko: snd-hda-core.ko snd-pcm.ko snd-hda-codec.ko snd.ko
 snd-hda-codec-via.ko: snd-hda-codec-generic.ko snd-hda-codec.ko snd-hda-core.ko snd.ko
 snd-hda-codec.ko: snd-hda-core.ko snd-pcm.ko snd.ko snd-hwdep.ko
 snd-hda-core.ko: snd-pcm.ko
-snd-hda-intel.ko: snd-hda-codec.ko snd-hda-core.ko snd-pcm.ko snd.ko
+snd-hda-intel.ko: snd-hda-core.ko snd-hda-codec.ko snd-pcm.ko snd.ko
 snd-hwdep.ko: snd.ko
 snd-mixer-oss.ko: snd.ko
 snd-pcm-dmaengine.ko: snd-pcm.ko

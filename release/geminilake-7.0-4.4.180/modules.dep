@@ -25,7 +25,7 @@ bcm-phy-lib.ko: libphy.ko
 be2net.ko:
 bitblit.ko: fb.ko softcursor.ko
 bnx2.ko:
-bnx2x.ko: mdio.ko
+bnx2x.ko: mdio.ko vxlan.ko
 bnxt_en.ko: vxlan.ko
 broadcom.ko: bcm-phy-lib.ko libphy.ko
 button.ko:
@@ -57,7 +57,7 @@ cxgb4vf.ko:
 dm9601.ko: usbnet.ko usbcore.ko mii.ko
 dme1737.ko: hwmon-vid.ko
 drm.ko: drm_panel_orientation_quirks.ko
-drm_kms_helper.ko: drm.ko fb.ko fb_sys_fops.ko cfbfillrect.ko syscopyarea.ko cfbimgblt.ko sysfillrect.ko sysimgblt.ko fb.ko cfbcopyarea.ko
+drm_kms_helper.ko: drm.ko fb.ko fb_sys_fops.ko cfbfillrect.ko syscopyarea.ko cfbimgblt.ko sysfillrect.ko sysimgblt.ko cfbcopyarea.ko
 drm_panel_orientation_quirks.ko:
 dvb-core.ko:
 dvb-usb-dib0700.ko: dib7000m.ko dib9000.ko dibx000_common.ko dvb-usb.ko dib0090.ko dib0070.ko dib3000mc.ko usbcore.ko rc-core.ko
@@ -73,7 +73,7 @@ ehci-pci.ko: usbcore.ko ehci-hcd.ko
 exfat.ko:
 f71882fg.ko:
 f75375s.ko:
-fb.ko: fb.ko fbdev.ko
+fb.ko: fbdev.ko
 fb_sys_fops.ko:
 fbcon.ko: fb.ko fbdev.ko font.ko bitblit.ko
 fbdev.ko:

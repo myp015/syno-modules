@@ -26,7 +26,7 @@ bcm-phy-lib.ko: libphy.ko
 be2net.ko:
 bitblit.ko: fb.ko softcursor.ko
 bnx2.ko:
-bnx2x.ko: mdio.ko
+bnx2x.ko: mdio.ko vxlan.ko
 bnxt_en.ko: vxlan.ko
 broadcom.ko: bcm-phy-lib.ko libphy.ko
 button.ko:

@@ -137,11 +137,11 @@ megaraid_mbox.ko: megaraid_mm.ko
 megaraid_mm.ko:
 megaraid_sas.ko:
 mii.ko:
-mlx4_core.ko:
-mlx4_en.ko: mlx4_core.ko
-mlx4_ib.ko: mlx4_core.ko ib_core.ko ib_mad.ko ib_sa.ko
-mlx5_core.ko:
-mlx5_ib.ko: mlx5_core.ko ib_core.ko
+mlx4_core.ko: mlx_compat.ko
+mlx4_en.ko: mlx4_core.ko mlx_compat.ko vxlan.ko
+mlx4_ib.ko: mlx4_core.ko mlx_compat.ko ib_core.ko
+mlx5_core.ko: mlx_compat.ko vxlan.ko
+mlx5_ib.ko: mlx5_core.ko ib_core.ko mlx_compat.ko
 mlx_compat.ko:
 mlxsw_core.ko:
 mlxsw_pci.ko: mlxsw_core.ko
@@ -172,7 +172,7 @@ processor.ko:
 qcaspi.ko:
 qed.ko:
 qede.ko: vxlan.ko qed.ko
-qedr.ko: qed.ko ib_core.ko
+qedr.ko: ipv6.ko qede.ko qed.ko
 qla3xxx.ko:
 qlcnic.ko:
 qlge.ko:
