@@ -1,7 +1,7 @@
-# kexports —— 官方内核导出符号面（vendored 参考数据）
+# kexports —— 官方内核/模块导出符号面（vendored 参考数据）
 
-本目录存放**各平台官方内核的导出符号表**，供发布门禁 `ainas-modules/scripts/gate_release.py` 判定
-"我们自编模块的未定义符号（UND）是否有提供者"。
+本目录存放**各平台官方内核与官方模块的导出符号表**，供发布门禁 `ainas-modules/scripts/gate_release.py`
+判定"我们自编模块的未定义符号（UND）是否有提供者"。
 
 ## 为什么需要它
 
@@ -13,27 +13,42 @@
 
 ## 文件命名与来源
 
-| 项 | 说明 |
+| 文件 | 内容 |
 |---|---|
-| 命名 | `exports_<platform>_74.txt`；后缀 `_74` 表示**提取自 DSM 7.4 的官方内核** |
-| 例外 | `epyc7002` 的历史文件无 `.txt` 后缀（`exports_vmlinux_epyc7002_74`），读取方需回退 |
-| 平台数 | 17，与 `.github/matrix/build.json` 的平台集合一一对应 |
+| `exports_<平台>_<两位版本>.txt` | 官方**内核**导出面（官方 `zImage` 解出的 vmlinux 的 `__ksymtab`） |
+| `exports_mod_<平台>_<两位版本>.txt` | 官方**模块**导出面（`official/hda1` ∪ `official/rd` 的 `__ksymtab_<name>`） |
+| `exports_cks_<平台>_<两位版本>.txt` | 我们自编 **cks 内核**导出面 —— 落 `ainas-cks/kexports/`，**不在本目录** |
 
-生成方式（上游工具链）：
+`<两位版本>` = DSM 大版本去点（7.4 → `74`），与 target 名的第二段一致（`TARGET_RE` 的捕获组）。
 
-1. `ainas-modules/getOfficial.sh` 取官方固件/内核；
-2. 从官方 `zImage` 解出 `vmlinux_<platform>_74`；
-3. 用 `/www/tmp/official-zimage/extract_exports_v2.py` 解析 `__ksymtab`（4.x 为 16B 绝对指针条目，
-   5.x 为 12B prel32 条目），从 `__ksymtab_strings` 读符号名。
+- 例外：`epyc7002` 的历史文件无 `.txt` 后缀（`exports_vmlinux_epyc7002_74`），读取方需回退。
+- 平台数：17，与 `.github/matrix/build.json` 的平台集合一一对应。
+
+## 生成方式（自动化，Task#196）
+
+由 `ainas-build/.github/workflows/kexports.yml` 触发 `ainas-modules/scripts/export_kexports.sh` 生成：
+
+1. **官方内核**：`myp015/ainas-dsm`（旧名 arc-dsm）分支 `new` 的
+   `dsm/<型号>/<DSM版本目录>/zImage` —— 版本取 7.0.1 / 7.1.1 / 7.2.2 / 7.3.2 / 7.4.1，每平台一个型号；
+   目录名带 build 号（如 `7.4.1-90080-0`）故按**前缀匹配**。**尚无该版本目录时跳过、不失败**。
+2. **cks 内核**：`myp015/ainas-cks` 的 `release/<平台>-<版本>-<kver>/bzImage`。
+3. **官方模块**：本仓库 `official/{hda1,rd}/<平台>-<版本>-<kver>/*.ko`，判据只取 `__ksymtab_<name>`
+   （真 EXPORT_SYMBOL），与门禁 `nm_batch()` 完全一致。
+
+提取链：`extract-vmlinux`（解 zImage/bzImage）→ `extract_exports_v2.py`（解析 `__ksymtab`：4.x 为 16B
+绝对指针条目，5.x 为 12B prel32 条目，从 `__ksymtab_strings` 读符号名）。
+⚠ `readelf` 拒绝管道（`'/dev/stdin' is not an ordinary file`）⇒ vmlinux 必须先落盘再提取。
 
 ## 已知局限（门禁的兜底判据正是为它而设）
 
-导出面取自 **7.4 的内核**，但同一平台还存在 **7.0/7.1（4.4.180）** target。用 7.4 的导出面核对 4.4.180
-target 会产生**跨 kver 假阳性**：4.4.302 backport 过 `__sk_receive_skb`，并把 `mii_ethtool_gset/sset/
-link_ok/nway_restart` 换成了 `mii_ethtool_get/set_link_ksettings`，4.4.180 内核没有这些变化。
+导出面按 target 的 DSM 版本选取（`gate_release.py:load_kexports(..., ver)`）；**缺该版本的面文件时
+回退 `_74` 并告警**。回退期间会产生**跨 kver 假阳性**：4.4.302 backport 过 `__sk_receive_skb`，并把
+`mii_ethtool_gset/sset/link_ok/nway_restart` 换成了 `mii_ethtool_get/set_link_ksettings`，4.4.180 内核
+没有这些变化。
 
-因此 `gate_release.py` 必须启用**兜底判据**：若某符号出现在**同一 target 的官方模块（`official/hda1`/`official/rd`）
-的 UND 里**，则官方模块必须能加载 ⇒ 该内核一定提供它 ⇒ 从缺口里剔除并单列。该判据在导出面版本正确时
-剔除集应为空；**一旦非空就说明导出面版本与 target 不匹配**（这是有意的自检信号，不是噪声）。
+因此 `gate_release.py` 必须启用**兜底判据**：若某符号出现在**同一 target 的官方模块（`official/hda1`/
+`official/rd`）的 UND 里**，则官方模块必须能加载 ⇒ 该内核一定提供它 ⇒ 从缺口里剔除并单列。
+该判据在导出面版本正确时剔除集应为空；**一旦非空就说明该 target 的面文件缺失或版本不匹配**
+（这是有意的自检信号，不是噪声）。
 
-参见 `tasks/lessons.md` 教训 79。
+参见 `tasks/lessons.md` 教训 79 与 Task#196。
