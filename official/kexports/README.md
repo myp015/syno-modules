@@ -21,8 +21,10 @@
 
 `<两位版本>` = DSM 大版本去点（7.4 → `74`），与 target 名的第二段一致（`TARGET_RE` 的捕获组）。
 
-- 例外：`epyc7002` 的历史文件无 `.txt` 后缀（`exports_vmlinux_epyc7002_74`），读取方需回退。
-- 平台数：17，与 `.github/matrix/build.json` 的平台集合一一对应。
+- 平台数：17，与 `.github/matrix/build.json` 的平台集合一一对应。当前官方内核面 47 份
+  （7.0/7.1 待 ainas-dsm 补齐后重跑），官方模块面 63 份。
+- 历史遗留的 `exports_vmlinux_epyc7002_74`（无 `.txt` 后缀）已由 Task#196 的自动化统一为
+  `exports_epyc7002_74.txt`（内容逐字节一致）并删除，门禁的无后缀回退分支同步简化。
 
 ## 生成方式（自动化，Task#196）
 
@@ -31,7 +33,11 @@
 1. **官方内核**：`myp015/ainas-dsm`（旧名 arc-dsm）分支 `new` 的
    `dsm/<型号>/<DSM版本目录>/zImage` —— 版本取 7.0.1 / 7.1.1 / 7.2.2 / 7.3.2 / 7.4.1，每平台一个型号；
    目录名带 build 号（如 `7.4.1-90080-0`）故按**前缀匹配**。**尚无该版本目录时跳过、不失败**。
-2. **cks 内核**：`myp015/ainas-cks` 的 `release/<平台>-<版本>-<kver>/bzImage`。
+   **次版本内回退**：精确版本目录缺失时，回退到同一 DSM 次版本的其他 build（`7.4.*-*`，取 build 号
+   最大者 —— 如 PAS7700 只有 `7.4.0-101205-0`）。同一 DSM 次版本内 kver 与内核 ABI 相同，正是门禁
+   关心的粒度；回退时日志打 `[回退]` 并标注实际使用的目录名。
+2. **cks 内核**：`myp015/ainas-cks` 的 `release/<平台>-<版本>-<kver>/bzImage` —— 经 `gh api`
+   按需下载（不 checkout 1.4G 的 `release/`）。
 3. **官方模块**：本仓库 `official/{hda1,rd}/<平台>-<版本>-<kver>/*.ko`，判据只取 `__ksymtab_<name>`
    （真 EXPORT_SYMBOL），与门禁 `nm_batch()` 完全一致。
 
