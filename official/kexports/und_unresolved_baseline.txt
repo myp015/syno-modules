@@ -11,3 +11,4 @@ mii_ethtool_set_link_ksettings
 mii_ethtool_sset
 mii_link_ok
 mii_nway_restart
+snd_seq_device_new
