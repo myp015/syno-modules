@@ -18,6 +18,8 @@
 | `exports_<平台>_<两位版本>.txt` | 官方**内核**导出面（官方 `zImage` 解出的 vmlinux 的 `__ksymtab`） |
 | `exports_mod_<平台>_<两位版本>.txt` | 官方**模块**导出面（`official/hda1` ∪ `official/rd` 的 `__ksymtab_<name>`） |
 | `exports_cks_<平台>_<两位版本>.txt` | 我们自编 **cks 内核**导出面 —— 落 `ainas-cks/kexports/`，**不在本目录** |
+| `MANIFEST.md` | 每份面的**来源可追溯表**（仓库/目录/build 号/符号数/是否走 `[回退]`），自动生成、勿手改 |
+| `und_unresolved_baseline.txt` | 官方模块 UND 未解析符号**基线**（自检用，见下） |
 
 `<两位版本>` = DSM 大版本去点（7.4 → `74`），与 target 名的第二段一致（`TARGET_RE` 的捕获组）。
 
@@ -45,6 +47,19 @@
 绝对指针条目，5.x 为 12B prel32 条目，从 `__ksymtab_strings` 读符号名）。
 ⚠ `readelf` 拒绝管道（`'/dev/stdin' is not an ordinary file`）⇒ vmlinux 必须先落盘再提取。
 
+## 自检（kexports.yml 内，Task#196）
+
+1. **面文件健康度**（`export_kexports.sh`，硬失败）：符号数 ≥ 2000、必须含哨兵符号
+   （`printk` / `kmalloc_caches` / `register_netdev` / `eth_type_trans`）、不得低于上一版同名文件的
+   90%。防的是"python 提取成功但产出空/残缺面"静默通过 —— 先写临时文件、三项检查全过再 `mv`。
+2. **官方模块 UND 覆盖**（`check_official_und.py`，基线比对制）：官方模块的 UND 应能在
+   「内核面 ∪ 官方模块面」里解析。⚠ 官方包**自带残缺** —— `mii_*` 一族在官方 vmlinux 里根本不存在
+   （实测 0 次出现），却仍打包了引用它们的 `usbnet.ko` / `8139cp.ko`；部分平台没有 `libfc.ko`
+   却打包了 `tcm_fc.ko` ⇒ **不能硬门禁**，改为基线比对：只有出现**新的**未解析符号才失败
+   （那才是提取口径退化或面文件损坏）。基线 `und_unresolved_baseline.txt`（当前 13 个符号）。
+3. **三来源零产出**：官方内核面 / cks 面 / 官方模块面任一 `OK=0` 即硬失败
+   （教训：cks 面曾因 sparse-checkout 剪掉输入而静默 0/0）。
+
 ## 已知局限（门禁的兜底判据正是为它而设）
 
 导出面按 target 的 DSM 版本选取（`gate_release.py:load_kexports(..., ver)`）；**缺该版本的面文件时
@@ -52,9 +67,14 @@
 `mii_ethtool_gset/sset/link_ok/nway_restart` 换成了 `mii_ethtool_get/set_link_ksettings`，4.4.180 内核
 没有这些变化。
 
-因此 `gate_release.py` 必须启用**兜底判据**：若某符号出现在**同一 target 的官方模块（`official/hda1`/
-`official/rd`）的 UND 里**，则官方模块必须能加载 ⇒ 该内核一定提供它 ⇒ 从缺口里剔除并单列。
-该判据在导出面版本正确时剔除集应为空；**一旦非空就说明该 target 的面文件缺失或版本不匹配**
-（这是有意的自检信号，不是噪声）。
+因此 `gate_release.py` 启用**兜底判据**：若某符号出现在**同一 target 的官方模块（`official/hda1`/
+`official/rd`）的 UND 里**，则认为该内核提供它，从缺口里剔除。
+
+⚠ **该判据的前提不总成立**（Task#196 实测）：官方模块的 UND 里含有**真·无人提供**的符号
+（`mii_*` 与 `libfc` 两族，见上文"官方包自带残缺"）⇒ 这类剔除会**漏报真缺口**。
+故剔除集现在**按面是否回退分类输出**：
+
+- `[已知有损]` —— 面走了 `_74` 回退，剔除属跨 kver 假阳性，**补齐该版本面后应消失**；
+- `[需关注]` —— 面是**精确版本**却仍剔除，只可能是官方包固有残缺、面文件不完整、或判据误判。
 
 参见 `tasks/lessons.md` 教训 79 与 Task#196。

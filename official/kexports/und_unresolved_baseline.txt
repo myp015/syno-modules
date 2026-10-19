@@ -1,0 +1,13 @@
+_fc_frame_alloc
+fc_fc4_deregister_provider
+fc_fc4_register_provider
+fc_fill_reply_hdr
+fc_frame_alloc_fill
+fc_lport_iterate
+fc_lport_notifier_head
+mii_ethtool_get_link_ksettings
+mii_ethtool_gset
+mii_ethtool_set_link_ksettings
+mii_ethtool_sset
+mii_link_ok
+mii_nway_restart
